@@ -65,26 +65,29 @@ public class Grafo {
         this.routes = routes;
     }
     
+    //Metodo para anadir un almacen
     public void addRout(String r){
+        
         String[] names = new String[nVertices];  /// revisar si es con max o con num
         for(int i = 0; i < (vertices.getLength()); i++){
             names[i] = vertices.getElement(i).getName();
         }
         String[] temp = r.split(",");
-        int a = getIndex(names,temp[0]);
-        int b = getIndex(names,temp[1]);
+        int a = getIndex(names,temp[0].toUpperCase());
+        int b = getIndex(names,temp[1].toUpperCase());
         if (a != -1 && b != -1){
             matriz[a][b] = Integer.valueOf(temp[temp.length - 1]);
         }
     }
     
-    
+    //Medtodo para leer las rutas del txt
     public void readRoutes(){
         for(int i=1; i< routes.length; i++){
             addRout(routes[i]);           
         }
     }
 
+    //Metodo para obtener los indices de cada vertice
     public int getIndex(String[] name, String word){
         for(int i = 0; i < name.length; i++){
             if(name[i].equals(word)){
@@ -93,7 +96,18 @@ public class Grafo {
         }
         return -1;
     }
-
+    
+    //metodo para obtener el nombre del almacen
+     public String getNameStorage(int index){
+        for(int i = 0; i < vertices.getLength(); i++){
+            if(index == i){
+                return vertices.getElement(i).getName();
+            }
+        }
+        return "";
+    }
+    
+    //Imprimir matriz de adyacencia
     public void printMatrix(){
         for (int i = 0; i < nVertices; i++){
             for (int j = 0; j < nVertices; j++){
@@ -104,9 +118,11 @@ public class Grafo {
     }
     
     //Recorido de Anchura
-    public void bfs(int start){ //Le paso la posicion del vertice
-        System.out.println(start < vertices.getLength() && start > -1);
-        if (start < vertices.getLength() && start > -1){
+    public List<Storage> bfs(int start){ //Le paso la posicion del vertice
+        if(vertices.isEmpty()){
+            JOptionPane.showMessageDialog(null,"El grafo no tiene informacion!");  
+        }else if (start < vertices.getLength() && start > -1){
+            List<Storage> listStorage = new List<>();
             Queue<Integer> queue = new Queue();
             boolean[] visited = createListVisited();
             queue.enqueue(start);
@@ -116,19 +132,22 @@ public class Grafo {
             while(!queue.isEmpty()){
                 // retorna el elemnto del nodo que esta de primero, que es el indice del nodo
                 aux = (int) queue.despachar(); //idice del nodo 
-                System.out.println(vertices.getElement(aux).getName());
+                listStorage.insertLast(vertices.getElement(aux));
                 for(int i = 0; i < nVertices; i++){
                     if (matriz[aux][i] != 0 && (!visited[i])){
                         queue.enqueue(i);
                         visited[i] = true;
                     }
+                }
             }
-        }
+            return listStorage;
         }else{
            JOptionPane.showMessageDialog(null,"Error en el idex!"); 
         }
+        return null;
     }
     
+    //Crear una lista de Almacenes visitados, inicializada en false
     public boolean[] createListVisited(){
         boolean[] visited = new boolean[nVertices];
         for (int i = 0; i < visited.length; i++){
@@ -137,17 +156,44 @@ public class Grafo {
         return visited;
     }
     
-    public void dfs(int start, boolean[] visited){
-        if (start < vertices.getLength() && start > -1){
+    
+    //recorrido Profundo
+    public List<Storage> dfs(int start, boolean[] visited, List<Storage> ListStorages){
+        if(vertices.isEmpty()){
+            JOptionPane.showMessageDialog(null,"Grafo vacio!"); 
+        }else if (start < vertices.getLength() && start > -1){
         visited[start] = true;
-        System.out.println(vertices.getElement(start).getName());
+        ListStorages.insertLast(vertices.getElement(start));
         for (int i = 0; i < matriz[start].length; i++) {
             if (matriz[start][i] != 0 && (!visited[i])) {
-                dfs(i, visited);
+                dfs(i, visited, ListStorages);
                     }
-                }
+            }
+        return ListStorages;
         }else{
             JOptionPane.showMessageDialog(null,"Error en el idex!"); 
         }
+        return null;
+    }
+    
+    
+    //Metodo para anadir un Almacen nuevo
+    public void addVertice(Storage storage, String routes){//Despues de hacer toda la verificacion es string o Antes
+        int[][] matriztemp = new int[maxVertices + 1][maxVertices + 1];
+        for (int i = 0; i< maxVertices; i++){
+            for (int j = 0; j< maxVertices; j++){
+                if(this.matriz[i][j] != 0){
+                    matriztemp[i][j] = this.matriz[i][j];
+                }else{
+                    matriztemp[i][j] = 0;
+                    
+                }
+            }
+        }
+        this.matriz = matriztemp;
+        this.maxVertices++;
+        this.nVertices++;
+        vertices.insertLast(storage);
+        addRout(routes);
     }
 }

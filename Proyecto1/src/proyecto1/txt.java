@@ -8,7 +8,51 @@ import java.io.PrintWriter;
 import javax.swing.JOptionPane;
 
 public class txt {
-     public static Grafo readTxt(){
+    
+       public static void writeTxt(Grafo grafo){
+       List<Storage> info = grafo.getVertices();
+       int[][] matriz = grafo.getMatriz();
+       String storageTxt = "Almacenes;\n";
+        if(!info.isEmpty()){
+            for (int i = 0; i < info.getLength(); i++){
+                storageTxt += "Almacen " +info.getElement(i).getName() + ":\n";
+                for(int j = 0; j < info.getElement(i).getProducts().getLength(); j++){
+                    if(j == (info.getElement(i).getProducts().getLength() -1)){
+                         storageTxt += info.getElement(i).getProducts().getElement(j).getName() + "," + info.getElement(i).getProducts().getElement(j).getStock() + ";\n";
+                    }else{
+                        storageTxt += info.getElement(i).getProducts().getElement(j).getName() + "," + info.getElement(i).getProducts().getElement(j).getStock() + "\n";
+                    }
+                }
+            }
+            String routes = "Rutas;\n";
+            for (int i = 0; i < info.getLength(); i++){
+                for(int j = 0; j < info.getLength(); j++){
+                    if(matriz[i][j] != 0){
+                        String a = grafo.getNameStorage(i);
+                        String b = grafo.getNameStorage(j);
+                        if(!"".equals(a)&& !"".equals(b) ){
+                            routes += a + "," + b + "," + matriz[i][j] + "\n";
+                        }
+                    }
+                }
+            }
+            
+            storageTxt += routes;
+        }
+        
+        try{
+            PrintWriter pw = new PrintWriter("test\\txt.txt");
+            pw.print(storageTxt); // escribe
+//            pw.append("Samuel,213213\n"); //Agregando
+            pw.close();
+             JOptionPane.showMessageDialog(null,"Guardador realizado Exitosamente");
+        }catch(Exception err){
+            JOptionPane.showMessageDialog(null,"Error");
+        }
+        
+    } 
+    
+    public static Grafo readTxt(){
         List<Storage> storages = new List<Storage>();
         String[] routes = new String[0];
         String line;
@@ -58,7 +102,7 @@ public class txt {
         String[] data = info.split("\n");        
         String[] tempn = data[1].split(" ");
         String[] name = tempn[tempn.length - 1].split(":");
-        Storage storage = new Storage(name[name.length - 1], readProducts(data));
+        Storage storage = new Storage(name[name.length - 1].toUpperCase(), readProducts(data));
         return storage;
     }
     

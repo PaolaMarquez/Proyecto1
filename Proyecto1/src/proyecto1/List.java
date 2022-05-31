@@ -140,4 +140,10 @@ public class List <T>{
         }
         return -1;
     }
+    
+    public void printList(){
+        for(int i =0; i < length; i++){
+            System.out.println(this.getElement(i));
+        }
+    }    
 }
