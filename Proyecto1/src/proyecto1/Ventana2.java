@@ -5,6 +5,8 @@
  */
 package proyecto1;
 
+import javax.swing.JOptionPane;
+
 public class Ventana2 extends javax.swing.JFrame {
     
     public Ventana2() {
@@ -58,22 +60,29 @@ public class Ventana2 extends javax.swing.JFrame {
      */
     
     public void showStorage(){
-        if (Global.getPath() == 1){
-            botonRecorrido.setText("  Recorrido en anchura ");
-        } else if (Global.getPath() == 2){
-            botonRecorrido.setText("  Recorrido en profundidad ");
-        }
-        for (int i = 0 ;i< Global.getGrafo().getVertices().getLength(); i++){
-            Storage storage = Global.getGrafo().getVertices().getElement(i);
-            jTextArea2.append("  " + "Almacén " + storage.getName() + ":" + '\n');
-            for (int j = 0 ;j< storage.getProducts().getLength(); j++){
-                Product product = storage.getProducts().getElement(j);
-                if ( j == storage.getProducts().getLength() - 1){
-                    jTextArea2.append("  " + product.getName() + ", " + product.getStock() + '\n' + '\n');
-                } else {
-                    jTextArea2.append("  " + product.getName() + ", " + product.getStock() + '\n');
+        List<Storage> list = new List();
+        if (Global.getGrafo() != null){
+            if (Global.getPath() == 1){
+                botonRecorrido.setText("  Recorrido en anchura ");
+                list = Global.getGrafo().bfs(0);
+            } else if (Global.getPath() == 2){
+                botonRecorrido.setText("  Recorrido en profundidad ");
+                list = Global.getGrafo().dfs(0, Global.getGrafo().createListVisited(), list);
+            }
+            for (int i = 0 ;i< list.getLength(); i++){
+                Storage storage = list.getElement(i);
+                jTextArea2.append("  " + "Almacén " + storage.getName() + ":" + '\n');
+                for (int j = 0 ;j< storage.getProducts().getLength(); j++){
+                    Product product = storage.getProducts().getElement(j);
+                    if ( j == storage.getProducts().getLength() - 1){
+                        jTextArea2.append("  " + product.getName() + ", " + product.getStock() + '\n' + '\n');
+                    } else {
+                        jTextArea2.append("  " + product.getName() + ", " + product.getStock() + '\n');
+                        }
                     }
                 }
+        }else{
+            JOptionPane.showMessageDialog(null,"No hay informacion registrada."); 
         }
     }
     

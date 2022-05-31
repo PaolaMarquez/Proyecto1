@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package proyecto1;
 
 import java.io.BufferedReader;
@@ -12,10 +8,6 @@ import java.io.IOException;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 
-/**
- *
- * @author paola
- */
 public class Menu extends javax.swing.JFrame {
 
     public Menu() {

@@ -10,12 +10,14 @@ public class Grafo {
     private int nVertices;
     private int maxVertices;
     private String[] routes;
+    private int numRoutes;
     
     public Grafo(int max, List<Storage> storage, String[] routes){
         this.vertices =  storage;
         this.nVertices = storage.getLength();
         this.maxVertices = max;
         this.routes = routes;
+        this.numRoutes = 0;
         this.matriz = new int[max][max];
         for (int i = 0; i< max; i++){
             for (int j = 0; j< max; j++){
@@ -24,6 +26,14 @@ public class Grafo {
         }
     }
 
+    public int getNumRoutes() {
+        return numRoutes;
+    }
+
+    public void setNumRoutes(int numRoutes) {
+        this.numRoutes = numRoutes;
+    } 
+    
     public List<Storage> getVertices() {
         return vertices;
     }
@@ -77,6 +87,9 @@ public class Grafo {
         int b = getIndex(names,temp[1].toUpperCase());
         if (a != -1 && b != -1){
             matriz[a][b] = Integer.valueOf(temp[temp.length - 1]);
+            numRoutes++;
+        }else{
+            JOptionPane.showMessageDialog(null,"No fueron encontrados los almacenes");  
         }
     }
     
@@ -120,7 +133,7 @@ public class Grafo {
     //Recorido de Anchura
     public List<Storage> bfs(int start){ //Le paso la posicion del vertice
         if(vertices.isEmpty()){
-            JOptionPane.showMessageDialog(null,"El grafo no tiene informacion!");  
+            JOptionPane.showMessageDialog(null,"No hay informacion almacenada");  
         }else if (start < vertices.getLength() && start > -1){
             List<Storage> listStorage = new List<>();
             Queue<Integer> queue = new Queue();
@@ -160,7 +173,7 @@ public class Grafo {
     //recorrido Profundo
     public List<Storage> dfs(int start, boolean[] visited, List<Storage> ListStorages){
         if(vertices.isEmpty()){
-            JOptionPane.showMessageDialog(null,"Grafo vacio!"); 
+            JOptionPane.showMessageDialog(null,"No hay informacion almacenada"); 
         }else if (start < vertices.getLength() && start > -1){
         visited[start] = true;
         ListStorages.insertLast(vertices.getElement(start));
@@ -178,7 +191,7 @@ public class Grafo {
     
     
     //Metodo para anadir un Almacen nuevo
-    public void addVertice(Storage storage, String routes){//Despues de hacer toda la verificacion es string o Antes
+    public void addVertice(Storage storage, String r1, String r2){//Despues de hacer toda la verificacion es string o Antes
         int[][] matriztemp = new int[maxVertices + 1][maxVertices + 1];
         for (int i = 0; i< maxVertices; i++){
             for (int j = 0; j< maxVertices; j++){
@@ -194,6 +207,7 @@ public class Grafo {
         this.maxVertices++;
         this.nVertices++;
         vertices.insertLast(storage);
-        addRout(routes);
+        addRout(r1);
+        addRout(r2);
     }
 }

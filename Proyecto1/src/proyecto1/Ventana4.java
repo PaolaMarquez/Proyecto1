@@ -5,6 +5,8 @@
  */
 package proyecto1;
 
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author paola
@@ -96,6 +98,7 @@ public class Ventana4 extends javax.swing.JFrame {
 
     private void route2InputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_route2InputActionPerformed
         route2Input.setText(" ");
+
     }//GEN-LAST:event_route2InputActionPerformed
 
     private void nameInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nameInputActionPerformed
@@ -106,10 +109,29 @@ public class Ventana4 extends javax.swing.JFrame {
         route1Input.setText(" ");
     }//GEN-LAST:event_route1InputActionPerformed
 
+    //Guardar la informacion del Almacen y crerlo
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        String name = nameInput.getText();
+        String name = nameInput.getText().toUpperCase();
         String route1 = route1Input.getText();
         String route2 = route2Input.getText();
+        
+        String[] n = name.split(" ");
+        if(Validation.route(route1) && Validation.route(route2)){
+            if(!name.isEmpty() && n.length == 1){
+                Boolean r1 = Validation.VerifyRoutes(route1, name);
+                Boolean r2 = Validation.VerifyRoutes(route2, name);
+                if(r1 && r2){
+                    List<Product> p = new List();
+                    Storage s = new Storage(name, p);
+                    Global.getGrafo().addVertice(s, route1, route2);
+                    JOptionPane.showMessageDialog(null,"Se agregaron las rutas exitosamente"); 
+                }else{
+                    JOptionPane.showMessageDialog(null,"Las rutas son incorrectas"); 
+                }
+            }else{
+                JOptionPane.showMessageDialog(null,"Los Datos son invalidos"); 
+            }
+        }
     }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
