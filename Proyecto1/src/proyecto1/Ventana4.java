@@ -129,7 +129,7 @@ public class Ventana4 extends javax.swing.JFrame {
                     JOptionPane.showMessageDialog(null,"Las rutas son incorrectas"); 
                 }
             }else{
-                JOptionPane.showMessageDialog(null,"Los Datos son invalidos"); 
+                JOptionPane.showMessageDialog(null,"Error! Poner solo el nombre del almacen"); 
             }
         }
     }//GEN-LAST:event_jButton1ActionPerformed

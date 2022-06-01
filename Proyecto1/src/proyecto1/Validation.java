@@ -21,36 +21,26 @@ public class Validation {
     
     //Verificar routes cuando se agrega un almacen
     public static Boolean VerifyRoutes(String route,String name){
-        String[] r = route.split(",");      
-        String[] storageName = new String[Global.getGrafo().getMaxVertices()];  /// revisar si es con max o con num
-        for(int i = 0; i < (Global.getGrafo().getMaxVertices()); i++){
-            storageName[i] = Global.getGrafo().getVertices().getElement(i).getName();
-        }
-        
-        if(r[0].toUpperCase().equals(name)){
-            System.out.println("True");
-        }else{
-            System.out.println("False");
-        }
-        
-        System.out.println("=====");
-          if(r[1].toUpperCase().equals(name)){
-            System.out.println("True");
-        }else{
-            System.out.println("False");
-        }
-        
+        String[] r = route.split(",");                
         if((r[0].toUpperCase().equals(name)) || (r[1].toUpperCase().equals(name))){
-            System.out.println("Entre a la funcion");
-            int a = Global.getGrafo().getIndex(storageName,r[0].toUpperCase());
-            int b = Global.getGrafo().getIndex(storageName,r[1].toUpperCase());
+            int a = Global.getGrafo().getIndex(r[0].toUpperCase());
+            int b = Global.getGrafo().getIndex(r[1].toUpperCase());
             System.out.println(a + " --- " + b);
             if(a != -1 || b != -1){
                 return true;
             }
-        }
-        System.out.println("Sali y no funciono");    
+        }   
         return false;
     } 
      
+    public static Product products(int index, String nameProduct){
+        List<Product> products = Global.getGrafo().getVertices().getElement(index).getProducts();
+        for(int i = 0; i < products.getLength(); i++){
+            if(products.getElement(i).getName().equals(nameProduct)){
+               return products.getElement(i);
+            }
+        }
+       
+       return null;
+   }
 }

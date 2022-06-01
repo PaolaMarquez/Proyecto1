@@ -5,6 +5,8 @@
  */
 package proyecto1;
 
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author paola
@@ -102,7 +104,26 @@ public class Ventana6 extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void newProductActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_newProductActionPerformed
-        // TODO add your handling code here:
+        String productName = nameProduct.getText();
+        String storage = storageProduct.getText().toUpperCase();
+        int indexStorage = Global.getGrafo().getIndex(storage);
+        if(indexStorage != -1){
+            try{
+                int stock = Integer.parseInt(stockProduct.getText());
+                for(int i = 0; i < Global.getGrafo().getVertices().getLength() ; i++){
+                    if(i == indexStorage){
+                        Product p = new Product(productName, stock);
+                        Global.getGrafo().getVertices().getElement(i).getProducts().insertLast(p);
+                        break;
+                    }
+                }
+                 JOptionPane.showMessageDialog(null,"Producto a"); 
+            }catch(Exception e){
+                JOptionPane.showMessageDialog(null,"Error en los datos ingresados"); 
+            }
+        }else{
+            JOptionPane.showMessageDialog(null,"Error en los datos ingresados"); 
+        }
     }//GEN-LAST:event_newProductActionPerformed
 
     private void storageProductActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_storageProductActionPerformed
@@ -116,9 +137,27 @@ public class Ventana6 extends javax.swing.JFrame {
     private void stockProductActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_stockProductActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_stockProductActionPerformed
-
+    
     private void addProductActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addProductActionPerformed
-        // TODO add your handling code here:
+        String productName = nameProduct.getText();
+        String storage = storageProduct.getText().toUpperCase();
+        int indexStorage = Global.getGrafo().getIndex(storage);
+        if(indexStorage != -1){
+            Product p = Validation.products(indexStorage, productName);
+            if( p != null){
+                try{
+                    int stock = Integer.parseInt(stockProduct.getText());
+                    p.setStock(p.getStock() + stock);
+                    JOptionPane.showMessageDialog(null,"Cantidad de producto añadido correctamente"); 
+                }catch(Exception e){
+                    JOptionPane.showMessageDialog(null,"Error en la cantidad ingresada"); 
+                }
+            }else{
+                JOptionPane.showMessageDialog(null,"Error en el nombre del producto"); 
+            }
+        }else{
+            JOptionPane.showMessageDialog(null,"Error en el nombre del almacen"); 
+        }
     }//GEN-LAST:event_addProductActionPerformed
 
     /**

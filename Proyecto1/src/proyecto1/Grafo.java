@@ -77,14 +77,9 @@ public class Grafo {
     
     //Metodo para anadir un almacen
     public void addRout(String r){
-        
-        String[] names = new String[nVertices];  /// revisar si es con max o con num
-        for(int i = 0; i < (vertices.getLength()); i++){
-            names[i] = vertices.getElement(i).getName();
-        }
         String[] temp = r.split(",");
-        int a = getIndex(names,temp[0].toUpperCase());
-        int b = getIndex(names,temp[1].toUpperCase());
+        int a = getIndex(temp[0].toUpperCase());
+        int b = getIndex(temp[1].toUpperCase());
         if (a != -1 && b != -1){
             matriz[a][b] = Integer.valueOf(temp[temp.length - 1]);
             numRoutes++;
@@ -92,6 +87,16 @@ public class Grafo {
             JOptionPane.showMessageDialog(null,"No fueron encontrados los almacenes");  
         }
     }
+    
+    //Metodo para obtener una lista on los nombres de los almacenes
+    public String[] nameStorage(){
+        String[] names = new String[nVertices];
+        for(int i = 0; i < (vertices.getLength()); i++){
+            names[i] = vertices.getElement(i).getName();
+        }
+        return names;
+    }
+    
     
     //Medtodo para leer las rutas del txt
     public void readRoutes(){
@@ -101,7 +106,8 @@ public class Grafo {
     }
 
     //Metodo para obtener los indices de cada vertice
-    public int getIndex(String[] name, String word){
+    public int getIndex(String word){
+        String[] name = nameStorage();
         for(int i = 0; i < name.length; i++){
             if(name[i].equals(word)){
                 return i;
