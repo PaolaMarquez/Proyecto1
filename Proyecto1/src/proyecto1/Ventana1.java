@@ -4,13 +4,9 @@
  * and open the template in the editor.
  */
 package proyecto1;
-//import java.io.BufferedReader;
-//import java.io.File;
-//import java.io.FileReader;
-//import java.io.IOException;
-//import javax.swing.JFileChooser;
-//import javax.swing.JOptionPane;
-//import java.io.FileWriter;
+
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author paola
@@ -51,7 +47,7 @@ public class Ventana1 extends javax.swing.JFrame {
 
         jLabel1.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
         jLabel1.setText("Desea guardar la información?");
-        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 90, -1, -1));
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 90, -1, -1));
 
         Save.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
         Save.setText("Guardar");
@@ -64,7 +60,7 @@ public class Ventana1 extends javax.swing.JFrame {
 
         jLabel2.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
         jLabel2.setText("El archivo es válido!");
-        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 40, -1, -1));
+        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 40, -1, -1));
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 310, 200));
 
@@ -72,7 +68,11 @@ public class Ventana1 extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void SaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SaveActionPerformed
-//        txt.writeFile();
+        if (Global.getGrafo()!= null){
+            txt.writeTxt(Global.getGrafo());
+        } else {
+            JOptionPane.showMessageDialog(null,"El grafo no tiene informacion!");  
+        }
     }//GEN-LAST:event_SaveActionPerformed
 
     private void jFileChooser2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jFileChooser2ActionPerformed

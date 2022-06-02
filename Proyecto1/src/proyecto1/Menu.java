@@ -170,7 +170,8 @@ public class Menu extends javax.swing.JFrame {
     }//GEN-LAST:event_agregarAlmacenActionPerformed
 
     private void cargarArchivoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cargarArchivoActionPerformed
-        String text = openFile();
+        Grafo grafo = openFile();
+        Global.setGrafo(grafo);
         
     }//GEN-LAST:event_cargarArchivoActionPerformed
 
@@ -242,9 +243,10 @@ public class Menu extends javax.swing.JFrame {
     }
     
     
-    private String openFile() {
+    private Grafo openFile() {
     String aux = "";   
     String text = "";
+    Grafo grafo = null;
     try
     {
      JFileChooser jf = new JFileChooser();
@@ -261,12 +263,13 @@ public class Menu extends javax.swing.JFrame {
            br.close();
            JOptionPane.showMessageDialog(null,"El archivo se abrió exitosamente!");
       }
-        Grafo grafo = txt.checkFile(text);
+        grafo = txt.checkFile(text);
         Global.setGrafo(grafo);
 //        NO SE SI DEBERIA HACER QUE MEJOR LA FUNCIÓN RETORNE EL GRAFO
         if (grafo != null){
             Ventana1 v1 = new Ventana1();
             v1.setVisible(true);
+            return grafo;
         }
      }
      catch(IOException ex)
@@ -274,7 +277,7 @@ public class Menu extends javax.swing.JFrame {
        JOptionPane.showMessageDialog(null,ex+"" +
              "\nNo se ha encontrado el archivo");
       }
-    return text;
+    return grafo;
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
