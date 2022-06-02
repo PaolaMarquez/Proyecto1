@@ -24,7 +24,7 @@ public class Menu extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jDesktopPane1 = new javax.swing.JDesktopPane();
+        jDesktopPane2 = new javax.swing.JDesktopPane();
         jMenuBar1 = new javax.swing.JMenuBar();
         bienvenida = new javax.swing.JMenu();
         cargarArchivo = new javax.swing.JMenuItem();
@@ -43,8 +43,8 @@ public class Menu extends javax.swing.JFrame {
         setResizable(false);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jDesktopPane1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-        getContentPane().add(jDesktopPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 620, 450));
+        jDesktopPane2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        getContentPane().add(jDesktopPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 620, 450));
 
         bienvenida.setText("  Archivos  ");
         bienvenida.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
@@ -279,7 +279,7 @@ public class Menu extends javax.swing.JFrame {
     private javax.swing.JMenuItem archivoDefault;
     private javax.swing.JMenu bienvenida;
     private javax.swing.JMenuItem cargarArchivo;
-    private javax.swing.JDesktopPane jDesktopPane1;
+    private javax.swing.JDesktopPane jDesktopPane2;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenu mostrarAlmacenes;
     private javax.swing.JMenu realizarPedido;
