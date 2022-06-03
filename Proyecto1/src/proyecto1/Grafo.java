@@ -1,4 +1,4 @@
-
+    
 package proyecto1;
 
 import javax.swing.JOptionPane;

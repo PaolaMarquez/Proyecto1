@@ -124,7 +124,7 @@ public class Ventana4 extends javax.swing.JFrame {
                     List<Product> p = new List();
                     Storage s = new Storage(name, p);
                     Global.getGrafo().addVertice(s, route1, route2);
-                    JOptionPane.showMessageDialog(null,"Se agregaron las rutas exitosamente"); 
+                    JOptionPane.showMessageDialog(null,"Se agrego el almacen exitosamente"); 
                 }else{
                     JOptionPane.showMessageDialog(null,"Las rutas son incorrectas"); 
                 }

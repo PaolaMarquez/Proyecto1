@@ -25,7 +25,6 @@ public class Validation {
         if((r[0].toUpperCase().equals(name)) || (r[1].toUpperCase().equals(name))){
             int a = Global.getGrafo().getIndex(r[0].toUpperCase());
             int b = Global.getGrafo().getIndex(r[1].toUpperCase());
-            System.out.println(a + " --- " + b);
             if(a != -1 || b != -1){
                 return true;
             }
