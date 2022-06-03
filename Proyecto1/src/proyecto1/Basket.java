@@ -72,18 +72,27 @@ public class Basket {
                                 }else if (p.getStock() > aux.getStock()){
                                     int auxIndex = Validation.indProduct(pos, aux);
                                     int qty = p.getStock() - aux.getStock();
-                                    Storage ask = askOtherStorage(qty, aux.getName());
+                                    Storage ask = null;
+//                                            askOtherStorage(qty, aux.getName(), pos);
                                     grafo.getVertices().getElement(pos).getProducts().getElement(auxIndex).setStock(0);
                                     int indAsk = grafo.getIndex(ask.getName());
                                     Product aux2 = grafo.getVertices().getElement(indAsk).getProducts().getElement(auxIndex);
                                     grafo.getVertices().getElement(indAsk).getProducts().getElement(auxIndex).setStock(aux2.getStock() - qty);
                                 }
                             } else {
-                                askOtherStorage(p.getStock(), aux.getName());
+                                Storage ask = grafo.getVertices().getElement(1);
+//                                        askOtherStorage(p.getStock(), p.getName(), pos);
+                                int indexAsk = grafo.getIndex(ask.getName());
+                                for (int j = 0; j < ask.getProducts().getLength(); j++) {
+                                    if (ask.getProducts().getElement(j).getName().equals(p.getName())){
+                                        Product temp2 = grafo.getVertices().getElement(indexAsk).getProducts().getElement(j);
+                                        grafo.getVertices().getElement(indexAsk).getProducts().getElement(j).setStock(temp2.getStock()-p.getStock());
+                                        Basket.newProduct(p.getName(), name, String.valueOf(0));
+                                        break;
+                                    }
+                                }
                             }
-                    }
-
-                    
+                    }JOptionPane.showMessageDialog(null,"Felicidades! Tu pedido ha sido registrado.");
                 }
             } else {
                 JOptionPane.showMessageDialog(null, "Error, el almacén no existe");
@@ -107,9 +116,41 @@ public class Basket {
         return list;
     }
     
-    public Storage askOtherStorage(int qty, String nameProduct){
-        List<Storage> possibleStorages = this.possibleStorages(qty, nameProduct);
-//        Storage storage = abril();
-        return null;
+//    public Storage askOtherStorage(int qty, String nameProduct, int pos){
+//        List<Storage> possibleStorages = this.possibleStorages(qty, nameProduct);
+//        int [] distance = Dijkstra.dijkstra(Global.getGrafo().getMatriz(), pos);
+//        int count = Integer.MAX_VALUE;
+//        int indexStorage = 0;
+//        for (int i = 0; i < distance.length; i++) {
+//            int aux = Global.getGrafo().getIndex(possibleStorages.getElement(i).getName());
+//            if(distance[aux] < count){
+//                count = distance[aux];
+//                indexStorage = i;
+//            }
+//        }
+//        Storage s =  Global.getGrafo().getVertices().getElement(indexStorage);
+//        return s;
+//    }
+    
+    public static void newProduct(String productName, String storage, String stockProduct){
+        try{
+            storage = storage.toUpperCase();
+            int stock = Integer.parseInt(stockProduct);
+            int indexStorage = Global.getGrafo().getIndex(storage);
+            if (indexStorage !=-1){
+                for(int i = 0; i < Global.getGrafo().getVertices().getLength() ; i++){
+                    if(i == indexStorage){
+                        Product p = new Product(productName, stock);
+                        Global.getGrafo().getVertices().getElement(i).getProducts().insertLast(p);
+                        break;
+                    }
+                }
+                JOptionPane.showMessageDialog(null,productName + " ha sido añadid@ al almacén exitosamente!");
+            } else {
+                JOptionPane.showMessageDialog(null,"Error, el almacén no existe");
+            }
+        }catch (Exception e){
+            JOptionPane.showMessageDialog(null,"Error en los datos ingresados"); 
+        }
     }
 }

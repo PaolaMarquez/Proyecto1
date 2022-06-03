@@ -42,6 +42,7 @@ public class Ventana7 extends javax.swing.JFrame {
 
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        showStorage.setEditable(false);
         showStorage.setColumns(20);
         showStorage.setRows(5);
         jScrollPane1.setViewportView(showStorage);

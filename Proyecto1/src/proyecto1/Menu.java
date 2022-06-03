@@ -174,6 +174,8 @@ public class Menu extends javax.swing.JFrame {
 
     private void cargarArchivoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cargarArchivoActionPerformed
         Grafo grafo = openFile();
+        grafo.readRoutes();
+        grafo.printMatrix();
         Global.setGrafo(grafo);
         
     }//GEN-LAST:event_cargarArchivoActionPerformed

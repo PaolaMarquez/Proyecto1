@@ -41,10 +41,10 @@ public class txt {
         }
         
         try{
-            PrintWriter pw = new PrintWriter("test\\txt.txt");
+            PrintWriter pw = new PrintWriter("test\\amazon.txt");
             pw.print(storageTxt); // escribe
             pw.close();
-             JOptionPane.showMessageDialog(null,"Guardador realizado Exitosamente");
+            JOptionPane.showMessageDialog(null,"Guardado realizado exitosamente");
         }catch(Exception err){
             JOptionPane.showMessageDialog(null,"Error");
         }
@@ -54,7 +54,7 @@ public class txt {
     public static Grafo readTxt(){
         String line;
         String infoTxt = "";
-        String path = "test\\txt.txt";
+        String path = "test\\amazon.txt";
         File file = new File(path);
         
         try{
@@ -118,10 +118,10 @@ public class txt {
                             break;
                         }
                     }
-                    Global.setRoutes(routes);
-                    Global.setStorages(storages);
-                    grafo = new Grafo(storages.getLength(), storages, routes); 
-                }
+                Global.setRoutes(routes);
+                Global.setStorages(storages); 
+                grafo = new Grafo(storages.getLength(), storages, routes);
+                }  
             }
             if (Global.getRoutes().length != 0 && !Global.getStorages().isEmpty()){
                 JOptionPane.showMessageDialog(null,"El archivo cumple con la estructura necesaria!");
