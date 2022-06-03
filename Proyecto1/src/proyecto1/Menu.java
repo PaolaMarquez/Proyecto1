@@ -24,7 +24,7 @@ public class Menu extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jDesktopPane1 = new javax.swing.JDesktopPane();
+        jDesktopPane2 = new javax.swing.JDesktopPane();
         jMenuBar1 = new javax.swing.JMenuBar();
         bienvenida = new javax.swing.JMenu();
         cargarArchivo = new javax.swing.JMenuItem();
@@ -33,6 +33,7 @@ public class Menu extends javax.swing.JFrame {
         BFS = new javax.swing.JMenuItem();
         DFS = new javax.swing.JMenuItem();
         realizarPedido = new javax.swing.JMenu();
+        addBasket = new javax.swing.JMenuItem();
         agregar = new javax.swing.JMenu();
         agregarAlmacen = new javax.swing.JMenuItem();
         agregarRuta = new javax.swing.JMenuItem();
@@ -43,8 +44,8 @@ public class Menu extends javax.swing.JFrame {
         setResizable(false);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jDesktopPane1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-        getContentPane().add(jDesktopPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 620, 450));
+        jDesktopPane2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        getContentPane().add(jDesktopPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 620, 450));
 
         bienvenida.setText("  Archivos  ");
         bienvenida.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
@@ -100,6 +101,16 @@ public class Menu extends javax.swing.JFrame {
 
         realizarPedido.setText("  Realizar Pedido  ");
         realizarPedido.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+
+        addBasket.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
+        addBasket.setText("Realizar Pedido");
+        addBasket.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                addBasketActionPerformed(evt);
+            }
+        });
+        realizarPedido.add(addBasket);
+
         jMenuBar1.add(realizarPedido);
 
         agregar.setText("  Agregar  ");
@@ -162,7 +173,8 @@ public class Menu extends javax.swing.JFrame {
     }//GEN-LAST:event_agregarAlmacenActionPerformed
 
     private void cargarArchivoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cargarArchivoActionPerformed
-        String text = openFile();
+        Grafo grafo = openFile();
+        Global.setGrafo(grafo);
         
     }//GEN-LAST:event_cargarArchivoActionPerformed
 
@@ -197,6 +209,12 @@ public class Menu extends javax.swing.JFrame {
         Ventana6 v6 = new Ventana6();
         v6.setVisible(true);
     }//GEN-LAST:event_agregarProductoActionPerformed
+
+    private void addBasketActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addBasketActionPerformed
+        Ventana7 v7 = new Ventana7();
+        v7.setVisible(true);
+        v7.showStorage(Global.getGrafo().getVertices());
+    }//GEN-LAST:event_addBasketActionPerformed
 
     /**
      * @param args the command line arguments
@@ -234,9 +252,10 @@ public class Menu extends javax.swing.JFrame {
     }
     
     
-    private String openFile() {
+    private Grafo openFile() {
     String aux = "";   
     String text = "";
+    Grafo grafo = null;
     try
     {
      JFileChooser jf = new JFileChooser();
@@ -253,12 +272,12 @@ public class Menu extends javax.swing.JFrame {
            br.close();
            JOptionPane.showMessageDialog(null,"El archivo se abrió exitosamente!");
       }
-        Grafo grafo = txt.checkFile(text);
+        grafo = txt.checkFile(text);
         Global.setGrafo(grafo);
-//        NO SE SI DEBERIA HACER QUE MEJOR LA FUNCIÓN RETORNE EL GRAFO
         if (grafo != null){
             Ventana1 v1 = new Ventana1();
             v1.setVisible(true);
+            return grafo;
         }
      }
      catch(IOException ex)
@@ -266,12 +285,13 @@ public class Menu extends javax.swing.JFrame {
        JOptionPane.showMessageDialog(null,ex+"" +
              "\nNo se ha encontrado el archivo");
       }
-    return text;
+    return grafo;
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenuItem BFS;
     private javax.swing.JMenuItem DFS;
+    private javax.swing.JMenuItem addBasket;
     private javax.swing.JMenu agregar;
     private javax.swing.JMenuItem agregarAlmacen;
     private javax.swing.JMenuItem agregarProducto;
@@ -279,7 +299,7 @@ public class Menu extends javax.swing.JFrame {
     private javax.swing.JMenuItem archivoDefault;
     private javax.swing.JMenu bienvenida;
     private javax.swing.JMenuItem cargarArchivo;
-    private javax.swing.JDesktopPane jDesktopPane1;
+    private javax.swing.JDesktopPane jDesktopPane2;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenu mostrarAlmacenes;
     private javax.swing.JMenu realizarPedido;

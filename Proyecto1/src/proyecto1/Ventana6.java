@@ -116,8 +116,7 @@ public class Ventana6 extends javax.swing.JFrame {
                         Global.getGrafo().getVertices().getElement(i).getProducts().insertLast(p);
                         break;
                     }
-                }
-                 JOptionPane.showMessageDialog(null, productName + " anadido exitosamente!"); 
+                }JOptionPane.showMessageDialog(null, productName + " anadido exitosamente!");
             }catch(Exception e){
                 JOptionPane.showMessageDialog(null,"Error! Datos invalidos"); 
             }

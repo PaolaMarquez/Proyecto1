@@ -88,7 +88,7 @@ public class Grafo {
         }
     }
     
-    //Metodo para obtener una lista on los nombres de los almacenes
+    //Metodo para obtener una lista de los nombres de los almacenes
     public String[] nameStorage(){
         String[] names = new String[nVertices];
         for(int i = 0; i < (vertices.getLength()); i++){

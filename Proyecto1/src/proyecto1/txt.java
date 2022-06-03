@@ -51,11 +51,6 @@ public class txt {
         
     } 
     
-//    public static Grafo readTxt(){
-//        List<Storage> storages = new List<Storage>();
-//        String[] routes = new String[0];
-//    }
-
     public static Grafo readTxt(){
         String line;
         String infoTxt = "";
@@ -74,8 +69,8 @@ public class txt {
                     }
                 }
                 br.close();
-                Grafo grafo = txt.checkFile(infoTxt);
                 JOptionPane.showMessageDialog(null,"Lectura Exitosa");
+                Grafo grafo = txt.checkFile(infoTxt);
                 return grafo;
                 }              
         }catch(Exception ex){

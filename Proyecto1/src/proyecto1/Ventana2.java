@@ -26,7 +26,7 @@ public class Ventana2 extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
+        Titulo = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
         jTextArea2 = new javax.swing.JTextArea();
         botonRecorrido = new javax.swing.JLabel();
@@ -36,9 +36,9 @@ public class Ventana2 extends javax.swing.JFrame {
 
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel1.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
-        jLabel1.setText("ALMACENES");
-        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 20, -1, -1));
+        Titulo.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
+        Titulo.setText("ALMACENES");
+        jPanel1.add(Titulo, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 20, -1, -1));
 
         jTextArea2.setEditable(false);
         jTextArea2.setColumns(20);
@@ -120,8 +120,8 @@ public class Ventana2 extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel Titulo;
     private javax.swing.JLabel botonRecorrido;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTextArea jTextArea2;
