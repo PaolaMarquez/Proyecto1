@@ -43,4 +43,29 @@ public class Validation {
        
        return null;
    }
+    
+    public static int indProduct(int indStorage, Product product){
+        List<Product> products = Global.getGrafo().getVertices().getElement(indStorage).getProducts();
+        for(int i = 0; i < products.getLength(); i++){
+            if(products.getElement(i).getName().equals(product.getName())){
+               return i;
+            }
+        }
+       return -1;
+   }
+    
+    public static Product isInStorages(String nameProduct){
+        Product temp = null;
+        for (int i = 0; i < Global.getGrafo().getVertices().getLength(); i++) {
+            temp = Validation.products(i, nameProduct);
+            if (temp != null){
+                return temp;
+            }
+        }
+        return temp;
+    }
+    
+//    public List<Product> inThisStorage(){
+//        
+//    }
 }

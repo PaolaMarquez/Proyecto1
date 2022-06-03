@@ -117,7 +117,7 @@ public class Ventana6 extends javax.swing.JFrame {
                         break;
                     }
                 }
-                 JOptionPane.showMessageDialog(null,"Producto a"); 
+                 JOptionPane.showMessageDialog(null,"Producto añadido exitosamente!"); 
             }catch(Exception e){
                 JOptionPane.showMessageDialog(null,"Error en los datos ingresados"); 
             }

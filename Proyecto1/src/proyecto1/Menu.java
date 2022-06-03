@@ -33,6 +33,7 @@ public class Menu extends javax.swing.JFrame {
         BFS = new javax.swing.JMenuItem();
         DFS = new javax.swing.JMenuItem();
         realizarPedido = new javax.swing.JMenu();
+        addBasket = new javax.swing.JMenuItem();
         agregar = new javax.swing.JMenu();
         agregarAlmacen = new javax.swing.JMenuItem();
         agregarRuta = new javax.swing.JMenuItem();
@@ -100,6 +101,16 @@ public class Menu extends javax.swing.JFrame {
 
         realizarPedido.setText("  Realizar Pedido  ");
         realizarPedido.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+
+        addBasket.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
+        addBasket.setText("Realizar Pedido");
+        addBasket.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                addBasketActionPerformed(evt);
+            }
+        });
+        realizarPedido.add(addBasket);
+
         jMenuBar1.add(realizarPedido);
 
         agregar.setText("  Agregar  ");
@@ -199,6 +210,12 @@ public class Menu extends javax.swing.JFrame {
         v6.setVisible(true);
     }//GEN-LAST:event_agregarProductoActionPerformed
 
+    private void addBasketActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addBasketActionPerformed
+        Ventana7 v7 = new Ventana7();
+        v7.setVisible(true);
+        v7.showStorage(Global.getGrafo().getVertices());
+    }//GEN-LAST:event_addBasketActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -257,7 +274,6 @@ public class Menu extends javax.swing.JFrame {
       }
         grafo = txt.checkFile(text);
         Global.setGrafo(grafo);
-//        NO SE SI DEBERIA HACER QUE MEJOR LA FUNCIÓN RETORNE EL GRAFO
         if (grafo != null){
             Ventana1 v1 = new Ventana1();
             v1.setVisible(true);
@@ -275,6 +291,7 @@ public class Menu extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenuItem BFS;
     private javax.swing.JMenuItem DFS;
+    private javax.swing.JMenuItem addBasket;
     private javax.swing.JMenu agregar;
     private javax.swing.JMenuItem agregarAlmacen;
     private javax.swing.JMenuItem agregarProducto;
