@@ -201,8 +201,7 @@ public class Menu extends javax.swing.JFrame {
         Grafo grafo = txt.readTxt();
         grafo.readRoutes();
         grafo.printMatrix();
-        Global.setGrafo(grafo);
-        
+        Global.setGrafo(grafo);        
     }//GEN-LAST:event_archivoDefaultActionPerformed
 
     private void agregarProductoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_agregarProductoActionPerformed
