@@ -7,8 +7,15 @@ package proyecto1;
 
 import javax.swing.JOptionPane;
 
+/**
+ * Esta clase maneja todas las funcionalidades de la ventana 2, que se encarga de mostrar los almacenes tomando en cuenta el recorrido seleccionado
+ * @author paola
+ */
 public class Ventana2 extends javax.swing.JFrame {
     
+    /**
+     * Constructor para la ventana 2
+     */
     public Ventana2() {
         initComponents();
         this.setLocationRelativeTo(null);
@@ -59,6 +66,10 @@ public class Ventana2 extends javax.swing.JFrame {
      * @param args the command line arguments
      */
     
+    /**
+    * Este método recorre la lista de almacenes creados en el grafo, y los muestra en pantalla. 
+    * Según el path establecido en global, se llama a la función de recorrido en anchura o en profundidad.
+    */
     public void showStorage(){
         List<Storage> list = new List();
         if (Global.getGrafo() != null){
@@ -82,7 +93,7 @@ public class Ventana2 extends javax.swing.JFrame {
                     }
                 }
         }else{
-            JOptionPane.showMessageDialog(null,"No hay informacion registrada."); 
+            JOptionPane.showMessageDialog(null,"No hay información registrada."); 
         }
     }
     

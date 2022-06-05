@@ -8,8 +8,14 @@ import java.io.IOException;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 
+/**
+ * Esta clase contiene el menú de la interfaz gráfica y maneja todas las funcionalidades de este
+ * @author paola
+ */
 public class Menu extends javax.swing.JFrame {
-
+    /**
+     * Constructor para la ventana de menú
+     */
     public Menu() {
         initComponents();
         this.setLocationRelativeTo(null);
@@ -29,6 +35,7 @@ public class Menu extends javax.swing.JFrame {
         bienvenida = new javax.swing.JMenu();
         cargarArchivo = new javax.swing.JMenuItem();
         archivoDefault = new javax.swing.JMenuItem();
+        jMenuItem1 = new javax.swing.JMenuItem();
         mostrarAlmacenes = new javax.swing.JMenu();
         BFS = new javax.swing.JMenuItem();
         DFS = new javax.swing.JMenuItem();
@@ -70,6 +77,14 @@ public class Menu extends javax.swing.JFrame {
             }
         });
         bienvenida.add(archivoDefault);
+
+        jMenuItem1.setText("Actualizar información");
+        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem1ActionPerformed(evt);
+            }
+        });
+        bienvenida.add(jMenuItem1);
 
         jMenuBar1.add(bienvenida);
 
@@ -157,7 +172,10 @@ public class Menu extends javax.swing.JFrame {
     private void mostrarAlmacenesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mostrarAlmacenesActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_mostrarAlmacenesActionPerformed
-
+    
+    /**
+     * Este método despliega la ventana 5, encargada de registrar las nuevas rutas
+     */
     private void agregarRutaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_agregarRutaActionPerformed
         Ventana5 v5 = new Ventana5();
         v5.setVisible(true);
@@ -167,11 +185,17 @@ public class Menu extends javax.swing.JFrame {
         
     }//GEN-LAST:event_bienvenidaActionPerformed
 
+    /**
+     * Este método despliega la ventana 4, encargada de registrar los nuevos almacenes
+     */
     private void agregarAlmacenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_agregarAlmacenActionPerformed
         Ventana4 v4 = new Ventana4();
         v4.setVisible(true);
     }//GEN-LAST:event_agregarAlmacenActionPerformed
 
+    /**
+     * Este método lee el archivo txt del proyecto, para poder crear el grafo
+     */
     private void cargarArchivoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cargarArchivoActionPerformed
         Grafo grafo = openFile();
         grafo.readRoutes();
@@ -179,44 +203,62 @@ public class Menu extends javax.swing.JFrame {
         Global.setGrafo(grafo);
         
     }//GEN-LAST:event_cargarArchivoActionPerformed
-
+    
+    /**
+     * Este método despliega la ventana 2, encargada de mostrar los almacenes utilizando recorrido en anchura
+     * Se setea el path como 1 para que la ventana 2 sepa que información mostrar
+     */
     private void BFSActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BFSActionPerformed
         Global.setPath(1);
         Ventana2 v2 = new Ventana2();
         v2.setVisible(true);
         v2.showStorage();
-        
-        
-        
     }//GEN-LAST:event_BFSActionPerformed
 
+    /**
+     * Este método despliega la ventana 2, encargada de mostrar los almacenes utilizando recorrido en profundidad
+     * Se setea el path como 2 para que la ventana 2 sepa que información mostrar
+     */
     private void DFSActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DFSActionPerformed
         Global.setPath(2);
         Ventana2 v2 = new Ventana2();
         v2.setVisible(true);
         v2.showStorage();
-
-        
     }//GEN-LAST:event_DFSActionPerformed
 
+    /**
+     * Este método llama a la función que leerá la información del txt
+     */
     private void archivoDefaultActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_archivoDefaultActionPerformed
         Grafo grafo = txt.readTxt();
         grafo.readRoutes();
-        grafo.printMatrix();
         Global.setGrafo(grafo);
-        
     }//GEN-LAST:event_archivoDefaultActionPerformed
 
+    /**
+     * Este método despliega la ventana 6, encargada de añadir un producto nuevo
+     */
     private void agregarProductoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_agregarProductoActionPerformed
         Ventana6 v6 = new Ventana6();
         v6.setVisible(true);
     }//GEN-LAST:event_agregarProductoActionPerformed
 
+    /**
+     * Este método despliega la ventana 7, encargada de registrar el producto
+     */
     private void addBasketActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addBasketActionPerformed
         Ventana7 v7 = new Ventana7();
         v7.setVisible(true);
         v7.showStorage(Global.getGrafo().getVertices());
     }//GEN-LAST:event_addBasketActionPerformed
+
+    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+        if (Global.getGrafo()!= null){
+            txt.writeTxt(Global.getGrafo());
+        } else {
+            JOptionPane.showMessageDialog(null,"El grafo no tiene información!");  
+        }
+    }//GEN-LAST:event_jMenuItem1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -253,7 +295,10 @@ public class Menu extends javax.swing.JFrame {
         });
     }
     
-    
+    /**
+     * Este método permite que se despliegue el JFileChooser y además, lee el archivo seleccionado
+     * @return grafo que contiene la información de los almacenes y rutas que se obtuvo del txt
+     */
     private Grafo openFile() {
     String aux = "";   
     String text = "";
@@ -303,6 +348,7 @@ public class Menu extends javax.swing.JFrame {
     private javax.swing.JMenuItem cargarArchivo;
     private javax.swing.JDesktopPane jDesktopPane2;
     private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenu mostrarAlmacenes;
     private javax.swing.JMenu realizarPedido;
     private javax.swing.JMenu realizarPedido1;

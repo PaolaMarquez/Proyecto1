@@ -4,11 +4,14 @@ package proyecto1;
 import javax.swing.JOptionPane;
 
 /**
- *
+ * Esta clase maneja todas las funcionalidades de la ventana 5, que se encarga de registar los datos del usuario para agregar una nueva ruta
  * @author paola
  */
 public class Ventana5 extends javax.swing.JFrame {
-
+    
+    /**
+     * Constructor para la ventana 5
+     */
     public Ventana5() {
         initComponents();
         this.setLocationRelativeTo(null);
@@ -23,6 +26,7 @@ public class Ventana5 extends javax.swing.JFrame {
         route = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
+        jLabel3 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -34,13 +38,12 @@ public class Ventana5 extends javax.swing.JFrame {
         jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 30, -1, -1));
 
         route.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        route.setText("(E,S,P)");
         route.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 routeActionPerformed(evt);
             }
         });
-        jPanel1.add(route, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 110, 120, 20));
+        jPanel1.add(route, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 140, 120, 20));
 
         jLabel2.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
         jLabel2.setText("Ingrese la nueva ruta (Entrada, Salida, Peso)");
@@ -53,7 +56,11 @@ public class Ventana5 extends javax.swing.JFrame {
                 jButton1ActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 170, -1, -1));
+        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 180, -1, -1));
+
+        jLabel3.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
+        jLabel3.setText("Por ejemplo: (A,B,5)");
+        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 100, -1, -1));
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 380, 220));
 
@@ -64,6 +71,9 @@ public class Ventana5 extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_routeActionPerformed
 
+    /**
+    * Este método toma el input del usuario, verifica que cumple con los requisitos. Si lo hace, se añade al grafo y si no, se le notifica al usuario
+    */
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         String info = route.getText();
         if(Validation.route(info)){
@@ -116,6 +126,7 @@ public class Ventana5 extends javax.swing.JFrame {
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JTextField route;
     // End of variables declaration//GEN-END:variables

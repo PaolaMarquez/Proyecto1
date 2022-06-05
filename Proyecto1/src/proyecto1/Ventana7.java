@@ -6,11 +6,14 @@
 package proyecto1;
 
 /**
- *
+ * Esta clase maneja todas las funcionalidades de la ventana 7, que se encarga de tomar los datos del usuario para realizar el registro de un producto
  * @author paola
  */
 public class Ventana7 extends javax.swing.JFrame {
-
+    
+    /**
+     * Constructor para la ventana 7
+     */
     public Ventana7() {
         initComponents();
         setLocationRelativeTo(null);
@@ -105,12 +108,18 @@ public class Ventana7 extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_storageActionPerformed
 
+    /**
+    * Este método llama la función que revisará el input del usuario
+    */
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         Basket b = new Basket();
         b.checkInput(products.getText(), storage.getText());
         
     }//GEN-LAST:event_jButton1ActionPerformed
     
+    /**
+    * Este método recorre la lista y le muestra al usuario los almacenes, los productos y cantidades en cada uno de ellos
+    */
     public void showStorage(List<Storage> list){
         for (int i = 0 ;i< list.getLength(); i++){
             Storage storage = list.getElement(i);
