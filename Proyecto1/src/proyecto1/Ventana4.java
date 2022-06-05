@@ -8,11 +8,15 @@ package proyecto1;
 import javax.swing.JOptionPane;
 
 /**
- *
+ * Esta clase maneja todas las funcionalidades de la ventana 4, que se encarga de tomar los datos del usuario para añadir un nuevo almacén
+ * @author abril
  * @author paola
  */
 public class Ventana4 extends javax.swing.JFrame {
-
+    
+    /**
+     * Constructor para la ventana 4
+     */
     public Ventana4() {
         initComponents();
         this.setLocationRelativeTo(null);
@@ -36,6 +40,8 @@ public class Ventana4 extends javax.swing.JFrame {
         route2Input = new javax.swing.JTextField();
         nameInput = new javax.swing.JTextField();
         route1Input = new javax.swing.JTextField();
+        jLabel5 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -51,7 +57,7 @@ public class Ventana4 extends javax.swing.JFrame {
         jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 190, -1, -1));
 
         jLabel3.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
-        jLabel3.setText("Nombre del almacén: ");
+        jLabel3.setText("Nombre del almacén (ej. A) ");
         jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 90, -1, -1));
 
         jLabel4.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
@@ -65,17 +71,15 @@ public class Ventana4 extends javax.swing.JFrame {
                 jButton1ActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 230, -1, -1));
+        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 290, -1, -1));
 
-        route2Input.setText("(Entrada, Salida, Peso)");
         route2Input.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 route2InputActionPerformed(evt);
             }
         });
-        jPanel1.add(route2Input, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 190, -1, -1));
+        jPanel1.add(route2Input, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 190, 110, -1));
 
-        nameInput.setText("ej. Almacen A");
         nameInput.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 nameInputActionPerformed(evt);
@@ -83,15 +87,20 @@ public class Ventana4 extends javax.swing.JFrame {
         });
         jPanel1.add(nameInput, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 90, 110, -1));
 
-        route1Input.setText("(Entrada, Salida, Peso)");
         route1Input.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 route1InputActionPerformed(evt);
             }
         });
-        jPanel1.add(route1Input, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 140, -1, -1));
+        jPanel1.add(route1Input, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 140, 110, -1));
 
-        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 470, 280));
+        jLabel5.setText("IMPORTANTE: Los caminos deben ser registrados de la siguiente manera: ");
+        jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 220, 370, 30));
+
+        jLabel6.setText(" (Entrada, Salida, Peso), por ejemplo: (A,B,8)");
+        jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 250, -1, -1));
+
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 470, 350));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -109,7 +118,10 @@ public class Ventana4 extends javax.swing.JFrame {
         route1Input.setText(" ");
     }//GEN-LAST:event_route1InputActionPerformed
 
-    //Guardar la informacion del Almacen y crerlo
+    //
+    /**
+     * Este botón guarda la informacion del almacén y lo crea si cumple con los requisitos
+     */
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         String name = nameInput.getText().toUpperCase();
         String route1 = route1Input.getText();
@@ -175,6 +187,8 @@ public class Ventana4 extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JTextField nameInput;
     private javax.swing.JTextField route1Input;

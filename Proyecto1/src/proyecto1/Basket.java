@@ -3,31 +3,53 @@ package proyecto1;
 
 import javax.swing.JOptionPane;
 
+/**
+ * Esta clase maneja todas las funcionalidades de registrar pedido (leer el input, buscar el producto, revisar stock)
+ * @author paola
+ */
 public class Basket {
     List<Product> products;
     String input;
-
+    
+    /**
+     * Constructor para la clase Basket, se crea una lista nueva que servirá como cesta para almacenar los productos del pedido
+     */
     public Basket() {
         this.products = new List<Product>();
         this.input = "";
     }
-
+    
+    /**
+     *  @return Lista de productos
+     */
     public List<Product> getProducts() {
         return products;
     }
-
+    
+    /**
+     *  @param products es la lista de productos, es decir, la cesta del carrito
+     */
     public void setProducts(List<Product> products) {
         this.products = products;
     }
-
+    /**
+     *  @return String de input
+     */
     public String getInput() {
         return input;
     }
-
+    
+    /**
+     *  @param String de input
+     */
     public void setInput(String input) {
         this.input = input;
     }
     
+    /**
+     * Toma los inputs del usuario y los separa para poder revisarlos en la función checkInput
+     * @param input es el string del input tomado de la ventana de la interfaz gráfica que contiene la información del pedido
+     */
     public void readInput(String input){
         try{
             String[] info = input.split(";");
@@ -46,8 +68,14 @@ public class Basket {
             JOptionPane.showMessageDialog(null, "Error al ingresar los datos");
         }
     }   
-    
-    
+
+    /**
+     * Este método revisa que el input cumpla con las condiciones necesarias, y llama a diferentes funciones para poder registrar el pedido del usuario.
+     * Por ejemplo si en el almacén seleccionado no hay cantidad suficiente, se llama la función para pedirlo de otro almacén
+     * @param input es el string del input tomado de la ventana de la interfaz gráfica que contiene la información del pedido
+     * @param name es el string del nombre del almacen desde donde se realizará la compra 
+     * @return Lista de productos registrados en la compra
+     */
     public List<Product> checkInput(String input, String name){
         try{
             Grafo grafo = Global.getGrafo();
@@ -72,16 +100,14 @@ public class Basket {
                                 }else if (p.getStock() > aux.getStock()){
                                     int auxIndex = Validation.indProduct(pos, aux);
                                     int qty = p.getStock() - aux.getStock();
-                                    Storage ask = null;
-//                                            askOtherStorage(qty, aux.getName(), pos);
+                                    Storage ask = askOtherStorage(qty, aux.getName(), pos);                                           
                                     grafo.getVertices().getElement(pos).getProducts().getElement(auxIndex).setStock(0);
                                     int indAsk = grafo.getIndex(ask.getName());
                                     Product aux2 = grafo.getVertices().getElement(indAsk).getProducts().getElement(auxIndex);
                                     grafo.getVertices().getElement(indAsk).getProducts().getElement(auxIndex).setStock(aux2.getStock() - qty);
                                 }
                             } else {
-                                Storage ask = grafo.getVertices().getElement(1);
-//                                        askOtherStorage(p.getStock(), p.getName(), pos);
+                                Storage ask = askOtherStorage(p.getStock(), p.getName(), pos);
                                 int indexAsk = grafo.getIndex(ask.getName());
                                 for (int j = 0; j < ask.getProducts().getLength(); j++) {
                                     if (ask.getProducts().getElement(j).getName().equals(p.getName())){
@@ -104,34 +130,53 @@ public class Basket {
         }
         return null;
     }
-          
+    
+    /**
+     * Genera una lista con los alamacenes que cumplen con los requerimientos del producto pedido
+     * @param nameProduct es el string del nombre del producto que se está buscando
+     * @param qty es la cantidad del producto que se necesita
+     * @return Lista de almacenes que contienen la cantidad adecuada del producto seleccionado;
+     */
     public List<Storage> possibleStorages(int qty, String nameProduct){
         List<Storage> list = new List<Storage>();
         for (int i = 0; i < Global.getGrafo().getVertices().getLength(); i++) {
             Product temp = Validation.products(i, nameProduct);
             if (temp != null && qty <= temp.getStock()){
-                list.insertLast(Global.getGrafo().getVertices().getElement(temp.getStock()));
+                list.insertLast(Global.getGrafo().getVertices().getElement(i));
             }
         }
         return list;
     }
     
-//    public Storage askOtherStorage(int qty, String nameProduct, int pos){
-//        List<Storage> possibleStorages = this.possibleStorages(qty, nameProduct);
-//        int [] distance = Dijkstra.dijkstra(Global.getGrafo().getMatriz(), pos);
-//        int count = Integer.MAX_VALUE;
-//        int indexStorage = 0;
-//        for (int i = 0; i < distance.length; i++) {
-//            int aux = Global.getGrafo().getIndex(possibleStorages.getElement(i).getName());
-//            if(distance[aux] < count){
-//                count = distance[aux];
-//                indexStorage = i;
-//            }
-//        }
-//        Storage s =  Global.getGrafo().getVertices().getElement(indexStorage);
-//        return s;
-//    }
+    /**
+     * El método evalúa la menor ruta para llegar al almacén que tiene cantidad suficiente del producto
+     * @param qty es la cantidad del producto que se necesita
+     * @param nameProduct es el string del nombre del producto que se está buscando
+     * @param pos indice del almacén desde donde se realizará la compra
+     * @return Evalúa el camino más corto para llegar al siguiente almacen que contiene el producto
+     */
+    public Storage askOtherStorage(int qty, String nameProduct, int pos){
+        List<Storage> possibleStorages = this.possibleStorages(qty, nameProduct);
+        int [] distance = Dijkstra.dijkstra(Global.getGrafo().getMatriz(), pos);
+        int count = Integer.MAX_VALUE;
+        int indexStorage = 0;
+        for (int i = 0; i < possibleStorages.getLength(); i++) {
+            int aux = Global.getGrafo().getIndex(possibleStorages.getElement(i).getName());
+            if(distance[aux] < count && distance[aux]!=0){
+                count = distance[aux];
+                indexStorage = aux;
+            }
+        }
+        Storage s =  Global.getGrafo().getVertices().getElement(indexStorage);
+        return s;
+    }
     
+    /**
+     * El método crea un nuevo producto
+     * @param productName es el string del nombre del producto
+     * @param storage es el string del nombre del storage en donde se agregará el producto
+     * @param stockProduct es el string de la cantidad del stock del producto
+     */
     public static void newProduct(String productName, String storage, String stockProduct){
         try{
             storage = storage.toUpperCase();

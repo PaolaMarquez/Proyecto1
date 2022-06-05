@@ -7,8 +7,13 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import javax.swing.JOptionPane;
 
+/**
+ * Esta clase maneja todas las funcionalidades del txt, como leerlo, revisarlo y escribirlo
+ * @author abril
+ * @author paola
+ */
 public class txt {
-
+    
     public static void writeTxt(Grafo grafo){
        List<Storage> info = grafo.getVertices();
        int[][] matriz = grafo.getMatriz();
@@ -99,6 +104,12 @@ public class txt {
         return products;
     }
     
+    /**
+    * Este método revisa que el string de la información cumpla con los requisitos de txt.
+    * Si lo hace, se hace split de la información y se crea el grafo.
+    * @param infoTxt contiene la información rescatada del txt
+    * @return grafo contiene la información de almacenes y rutas, que fue leído del txt
+    */
     public static Grafo checkFile(String infoTxt){
         List<Storage> storages = new List<Storage>();
         String[] routes = new String[0];

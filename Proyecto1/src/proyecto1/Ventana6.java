@@ -8,11 +8,14 @@ package proyecto1;
 import javax.swing.JOptionPane;
 
 /**
- *
+ * Esta clase maneja todas las funcionalidades de la ventana 6, que se encarga de registar los datos del usuario para agregar un nuevo prodcuto
  * @author paola
  */
 public class Ventana6 extends javax.swing.JFrame {
 
+    /**
+     * Constructor para la ventana 6
+     */
     public Ventana6() {
         initComponents();
         this.setLocationRelativeTo(null);
@@ -103,6 +106,9 @@ public class Ventana6 extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    /**
+    * Este método toma los input del usuario, y llama a la función que agregará el producto
+    */
     private void newProductActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_newProductActionPerformed
         String productName = nameProduct.getText();
         String storage = storageProduct.getText().toUpperCase();

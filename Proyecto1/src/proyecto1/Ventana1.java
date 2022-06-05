@@ -8,11 +8,14 @@ package proyecto1;
 import javax.swing.JOptionPane;
 
 /**
- *
+ * Esta clase maneja todas las funcionalidades de la ventana 1, que se encarga de guardar la información que fue leída exitosamente del txt
  * @author paola
  */
 public class Ventana1 extends javax.swing.JFrame {
 
+    /**
+     * Constructor para la ventana 1
+     */
     public Ventana1() {
         initComponents();
         this.setLocationRelativeTo(null);
@@ -67,11 +70,14 @@ public class Ventana1 extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    /**
+    * Este método llama a la función de escribir txt
+    */
     private void SaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SaveActionPerformed
         if (Global.getGrafo()!= null){
             txt.writeTxt(Global.getGrafo());
         } else {
-            JOptionPane.showMessageDialog(null,"El grafo no tiene informacion!");  
+            JOptionPane.showMessageDialog(null,"El grafo no tiene información!");  
         }
     }//GEN-LAST:event_SaveActionPerformed
 
