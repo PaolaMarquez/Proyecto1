@@ -9,12 +9,13 @@ import javax.swing.JOptionPane;
  * @author paola
  */
 public class Validation {
-    
+
     /**
-     * Verifica routes cuando se agregan
-     * @param r es el string que contiene la información de una ruta que se va a verificar
-     * @return boolean depende de si cumple o no con el requisito
-     */
+    * Verificacion de rutas
+    * Metodo que permite verificar si las rutas que ingresa el usuario no tienen ningun problema
+    * @param r Representa un string de las rutas con su peso agregado
+    * @return retorna Verdadero si todos los datos son correctos
+    */
     public static boolean route(String r){
         String[] route = r.split(",");
         if (route.length == 3){
@@ -28,13 +29,18 @@ public class Validation {
         return false;
     }
     
-    //Verificar routes cuando se agrega un almacen
+      /**
+    * Verificacion de rutas De un nuevo Almacen
+    * Metodo que permite verificar si las rutas que ingresa el usuario cumplen con las condiciones para agregar un almacen
+    * @param r Representa un string de las rutas con su peso agregado
+    * @return retorna Verdadero si todos los datos son correctos
+    */
+    
     public static Boolean VerifyRoutes(String route,String name){
         String[] r = route.split(",");                
         if((r[0].toUpperCase().equals(name)) || (r[1].toUpperCase().equals(name))){
             int a = Global.getGrafo().getIndex(r[0].toUpperCase());
             int b = Global.getGrafo().getIndex(r[1].toUpperCase());
-            System.out.println(a + " --- " + b);
             if(a != -1 || b != -1){
                 return true;
             }

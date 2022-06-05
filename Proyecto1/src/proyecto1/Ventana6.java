@@ -114,6 +114,24 @@ public class Ventana6 extends javax.swing.JFrame {
         String storage = storageProduct.getText().toUpperCase();
         String stockP = stockProduct.getText();
         Basket.newProduct(productName, storage, stockP);
+//        int indexStorage = Global.getGrafo().getIndex(storage);
+//        if(indexStorage != -1){
+//            try{
+//                int stock = Integer.parseInt(stockProduct.getText());
+//                for(int i = 0; i < Global.getGrafo().getVertices().getLength() ; i++){
+//                    if(i == indexStorage){
+//                        Product p = new Product(productName, stock);
+//                        Global.getGrafo().getVertices().getElement(i).getProducts().insertLast(p);
+//                        break;
+//                    }
+//                }JOptionPane.showMessageDialog(null, productName + " anadido exitosamente!");
+//            }catch(Exception e){
+//                JOptionPane.showMessageDialog(null,"Error! Datos invalidos"); 
+//            }
+//        }else{
+//            JOptionPane.showMessageDialog(null,"Error en los datos ingresados"); 
+//        }
+//>>>>>>> cc0434a153b700fe16199365d74257fdfdc6f576
     }//GEN-LAST:event_newProductActionPerformed
 
     private void storageProductActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_storageProductActionPerformed
