@@ -31,6 +31,7 @@ public class Menu extends javax.swing.JFrame {
     private void initComponents() {
 
         jDesktopPane2 = new javax.swing.JDesktopPane();
+        jLabel1 = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         bienvenida = new javax.swing.JMenu();
         cargarArchivo = new javax.swing.JMenuItem();
@@ -52,6 +53,11 @@ public class Menu extends javax.swing.JFrame {
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jDesktopPane2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/amazon3.jpg"))); // NOI18N
+        jLabel1.setText("jLabel1");
+        jDesktopPane2.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(-30, 0, -1, -1));
+
         getContentPane().add(jDesktopPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 620, 450));
 
         bienvenida.setText("  Archivos  ");
@@ -177,8 +183,12 @@ public class Menu extends javax.swing.JFrame {
      * Este método despliega la ventana 5, encargada de registrar las nuevas rutas
      */
     private void agregarRutaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_agregarRutaActionPerformed
+        if (Global.getGrafo()!= null){
         Ventana5 v5 = new Ventana5();
         v5.setVisible(true);
+        }else{
+            JOptionPane.showMessageDialog(null,"No hay almacenes registrados!"); 
+        }
     }//GEN-LAST:event_agregarRutaActionPerformed
 
     private void bienvenidaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bienvenidaActionPerformed
@@ -198,9 +208,11 @@ public class Menu extends javax.swing.JFrame {
      */
     private void cargarArchivoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cargarArchivoActionPerformed
         Grafo grafo = openFile();
-        grafo.readRoutes();
-        grafo.printMatrix();
-        Global.setGrafo(grafo);
+        if (grafo != null){
+            grafo.readRoutes();
+            grafo.printMatrix();
+            Global.setGrafo(grafo);
+        }
         
     }//GEN-LAST:event_cargarArchivoActionPerformed
     
@@ -239,17 +251,25 @@ public class Menu extends javax.swing.JFrame {
      * Este método despliega la ventana 6, encargada de añadir un producto nuevo
      */
     private void agregarProductoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_agregarProductoActionPerformed
-        Ventana6 v6 = new Ventana6();
-        v6.setVisible(true);
+        if (Global.getGrafo() != null){
+            Ventana6 v6 = new Ventana6();
+            v6.setVisible(true);
+        }else{
+            JOptionPane.showMessageDialog(null,"No hay almacenes registrados!"); 
+        }
     }//GEN-LAST:event_agregarProductoActionPerformed
 
     /**
      * Este método despliega la ventana 7, encargada de registrar el producto
      */
     private void addBasketActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addBasketActionPerformed
-        Ventana7 v7 = new Ventana7();
-        v7.setVisible(true);
-        v7.showStorage(Global.getGrafo().getVertices());
+        if (Global.getGrafo() != null){
+            Ventana7 v7 = new Ventana7();
+            v7.setVisible(true);
+            v7.showStorage(Global.getGrafo().getVertices());
+        }else {
+            JOptionPane.showMessageDialog(null,"El grafo no tiene información!"); 
+        }
     }//GEN-LAST:event_addBasketActionPerformed
 
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
@@ -347,6 +367,7 @@ public class Menu extends javax.swing.JFrame {
     private javax.swing.JMenu bienvenida;
     private javax.swing.JMenuItem cargarArchivo;
     private javax.swing.JDesktopPane jDesktopPane2;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenu mostrarAlmacenes;
